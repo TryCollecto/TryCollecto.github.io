@@ -153,7 +153,7 @@
         const formData = new FormData(this);
         const email = formData.get('email');
         const formId = '7';
-        const collectoDomain = 'http://localhost:5001/'; // Replace with the actual Collecto domain
+        const collectoDomain = 'http://localhost:5001'; // Replace with the actual Collecto domain
         
         try {
             const response = await axios.post(`${collectoDomain}/api/EmailSignups`, {
