@@ -4,7 +4,7 @@
     <!-- Meta tags and fonts as before -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collecto - Self-Hosted Email Collector API</title>
+    <title>Collecto - Open-Source Email Collection API</title>
     
     <!-- Importing Fira Mono Font -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -184,20 +184,20 @@
 
 <header>
     <h1>Collecto</h1>
-    <p>Self-Hosted, Production-Ready Email Collection API</p>
+    <p>Open-Source, Self-Hosted Email Collection API</p>
 </header>
 
 <p>
-    <strong>Collecto</strong> was built for developers who care about <strong>control</strong>, <strong>scalability</strong>, and <strong>security</strong>.
+    <strong>Collecto</strong> is an <strong>open-source</strong>, self-hosted email collection solution built for developers who care about <strong>control</strong>, <strong>scalability</strong>, and <strong>security</strong>.
     <br><br>
-    In a world where hosted services often put your data at risk, Collecto provides a <strong>self-hosted email collection solution</strong> that you <strong>own and manage</strong>.
+    In a world where hosted services often put your data at risk, Collecto provides a solution that you <strong>own and manage</strong>.
     <br><br>
     Whether you're building a high-traffic product or a small project, Collecto is <strong>production-ready</strong> out of the box, capable of handling everything from basic email signup forms to complex data workflows. Built with the backend developer in mind, Collecto defends against <strong>spam</strong>, <strong>DDoS attacks</strong>, and gives you the <strong>flexibility</strong> to integrate email signup functionality into any part of your stack.
 </p>
 
 <div class="form-container">
     <h2>Stay Updated</h2>
-    <form id="signup-form" action="https://3755-85-65-170-141.ngrok-free.app/api/signup" method="POST">
+    <form id="signup-form" action="https://your-collecto-instance.com/api/EmailSignups" method="POST">
         <input type="email" name="email" placeholder="Enter your email" required>
         <input type="submit" value="Tell me more">
     </form>
@@ -208,59 +208,31 @@
     <h2>How it Works</h2>
     <p>Creating a form and accepting signups is <strong>simple</strong> with Collecto.</p>
     <pre>
-# Create a signup form
+<span style="color:#569cd6;"># Create a signup form</span>
 
 <span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/SignupForms</span>
 <span style="color:#dcdcaa;">Body</span>: {
-    <span style="color:#ce9178;">"formName"</span>: <span style="color:#ce9178;">"Newsletter Signup"</span>,
+    <span style="color:#ce9178;">"formName"</span>: <span style="color:#ce9178;">"Newsletter Signup"</span>
 }
 
-# Accept signups
+<span style="color:#569cd6;"># Accept signups</span>
 
 <span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/EmailSignups</span>
 <span style="color:#dcdcaa;">Body</span>: {
-    <span style="color:#ce9178;">"fromId"</span>: <span style="color:#ce9178;">"1"</span>
+    <span style="color:#ce9178;">"formId"</span>: <span style="color:#ce9178;">"1"</span>,
     <span style="color:#ce9178;">"email"</span>: <span style="color:#ce9178;">"user@example.com"</span>
 }
     </pre>
 </div>
 
-<section id="pricing" style="text-align:center; padding:50px 20px;">
-    <h2>Choose Your Collecto License</h2>
-    <div class="pricing-table">
-        <div class="pricing-option">
-            <h3>Standard License</h3>
-            <p><del>$149</del> <strong>$104</strong></p>
-            <p>One-Time Purchase</p>
-            <ul>
-                <li>Full Software Access</li>
-                <li>Lifetime Updates</li>
-                <li>Comprehensive Documentation</li>
-                <li>Community Support</li>
-            </ul>
-            <a href="#" class="btn">Get Standard License</a>
-        </div>
-        <div class="pricing-option">
-            <h3>Professional License</h3>
-            <p><del>$299</del> <strong>$209</strong></p>
-            <p>One-Time Purchase</p>
-            <ul>
-                <li>All Standard Features</li>
-                <li>Priority Email Support</li>
-                <li>Advanced Features & Analytics</li>
-                <li>Custom Integrations</li>
-                <li>Early Access to New Features</li>
-                <li>Dedicated Onboarding Assistance</li>
-            </ul>
-            <a href="#" class="btn">Get Professional License</a>
-        </div>
-    </div>
-    <p><em>Early Access Discount available until [Insert Date].</em></p>
-</section>
-
+<div style="text-align:center; margin-top: 50px;">
+    <a href="https://github.com/yourusername/collecto" class="button">View on GitHub</a>
+    <a href="https://yourwebsite.com/docs" class="button secondary-button">Read the Docs</a>
+</div>
 
 <footer>
     <p>&copy; 2024 Collecto. Built for developers, by developers.</p>
+    <p>Released under the <a href="https://github.com/yourusername/collecto/blob/main/LICENSE">MIT License</a>.</p>
 </footer>
 
 <script>
@@ -269,8 +241,8 @@
         
         const formData = new FormData(this);
         const email = formData.get('email');
-        const formId = '7';
-        const collectoDomain = 'https://3755-85-65-170-141.ngrok-free.app';
+        const formId = '1'; // Update with your actual form ID
+        const collectoDomain = 'https://your-collecto-instance.com';
         const messageDiv = document.getElementById('form-message');
         
         try {
