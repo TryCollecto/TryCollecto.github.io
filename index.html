@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags and fonts as before -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collecto - Self-Hosted Email Collector API</title>
@@ -11,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
+        /* General Styles */
         body {
             font-family: 'Fira Mono', monospace;
             background-color: #1e1e1e;
@@ -20,18 +22,34 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+        a {
+            color: #e0e0e0;
+            text-decoration: none;
+            border-bottom: 1px dashed #e0e0e0;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        a:hover {
+            color: red;
+            border-bottom: 1px solid red;
         }
         header {
             text-align: center;
-            padding: 50px;
+            padding: 50px 20px;
         }
         header h1 {
-            font-size: 3em;
+            font-size: 4em;
             margin: 0;
             font-weight: 700;
             color: #f0f0f0;
+            letter-spacing: -2px;
+        }
+        header p {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #bbb;
         }
         p {
             font-size: 1.2em;
@@ -42,61 +60,123 @@
         }
         p strong {
             font-weight: 700;
-            transition: color 0.5s, text-decoration 0.3s;
+            transition: color 0.5s;
         }
         p strong:hover {
             color: red;
         }
         .form-container {
-            background-color: #333;
-            padding: 20px;
+            background-color: #2e2e2e;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            margin-top: 30px;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #f0f0f0;
+            font-size: 2em;
         }
         input[type="email"], input[type="submit"] {
-            padding: 10px;
+            padding: 15px;
             font-size: 1.2em;
             width: 100%;
-            max-width: 400px;
             margin: 10px 0;
             border-radius: 50px;
-            border: 1px solid #555;
+            border: none;
             font-family: 'Fira Mono', monospace;
+            outline: none;
+        }
+        input[type="email"] {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border: 1px solid #555;
+        }
+        input[type="email"]:focus {
+            border-color: red;
         }
         input[type="submit"] {
-            background-color: #555;
+            background-color: red;
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s;
+            border-radius: 50px;
+            border: none;
         }
         input[type="submit"]:hover {
-            background-color: red;
+            background-color: #ff4d4d;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #e0e0e0;
+            text-align: center;
+            display: none;
+        }
+        .message.success {
+            color: #4caf50;
+        }
+        .message.error {
+            color: #f44336;
         }
         .code-section {
             background-color: #2a2a2a;
-            padding: 15px;
+            padding: 30px;
             border-radius: 10px;
-            margin-top: 20px;
+            margin-top: 50px;
             font-family: 'Fira Mono', monospace;
             max-width: 800px;
+            width: 90%;
+            box-sizing: border-box;
+        }
+        .code-section h2 {
+            color: #f0f0f0;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+        .code-section p {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
         }
         .code-section pre {
             overflow-x: auto;
-            background-color: #333;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
             color: #e0e0e0;
+            font-size: 1em;
+            line-height: 1.5;
+            border: 1px solid #555;
+        }
+        .code-section code {
+            color: #9cdcfe;
         }
         footer {
             text-align: center;
             font-size: 0.8em;
             color: #777;
-            margin-top: 40px;
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+        /* Media Queries */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            .form-container {
+                padding: 20px;
+            }
+            .code-section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -116,29 +196,31 @@
 </p>
 
 <div class="form-container">
+    <h2>Stay Updated</h2>
     <form id="signup-form" action="https://3755-85-65-170-141.ngrok-free.app/api/signup" method="POST">
         <input type="email" name="email" placeholder="Enter your email" required>
         <input type="submit" value="Tell me more">
     </form>
+    <div class="message" id="form-message"></div>
 </div>
 
 <div class="code-section">
     <h2>How it Works</h2>
     <p>Creating a form and accepting signups is <strong>simple</strong> with Collecto.</p>
     <pre>
-    # Create a signup form
+# Create a signup form
 
-    POST /api/SignupForms
-    Body: {
-        "formName": "Newsletter Signup",
-    }
+<span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/SignupForms</span>
+<span style="color:#dcdcaa;">Body</span>: {
+    <span style="color:#ce9178;">"formName"</span>: <span style="color:#ce9178;">"Newsletter Signup"</span>,
+}
 
-    # Accept signups
+# Accept signups
 
-    POST /api/EmailSignups/{formId}/signup
-    Body: {
-        "email": "user@example.com"
-    }
+<span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/EmailSignups/{formId}/signup</span>
+<span style="color:#dcdcaa;">Body</span>: {
+    <span style="color:#ce9178;">"email"</span>: <span style="color:#ce9178;">"user@example.com"</span>
+}
     </pre>
 </div>
 
@@ -154,6 +236,7 @@
         const email = formData.get('email');
         const formId = '7';
         const collectoDomain = 'https://3755-85-65-170-141.ngrok-free.app';
+        const messageDiv = document.getElementById('form-message');
         
         try {
             const response = await axios.post(`${collectoDomain}/api/EmailSignups`, {
@@ -161,10 +244,19 @@
                 email
             });
             
-            alert('Signup successful!');
+            messageDiv.style.display = 'block';
+            messageDiv.className = 'message success';
+            messageDiv.textContent = 'Signup successful! Please check your email to confirm your subscription.';
+            this.reset();
         } catch (error) {
             console.error('Error during signup:', error);
-            alert('Error during signup, please try again.');
+            messageDiv.style.display = 'block';
+            messageDiv.className = 'message error';
+            if (error.response && error.response.data && error.response.data.message) {
+                messageDiv.textContent = 'Error: ' + error.response.data.message;
+            } else {
+                messageDiv.textContent = 'An unexpected error occurred. Please try again.';
+            }
         }
     });
 </script>
