@@ -217,8 +217,9 @@
 
 # Accept signups
 
-<span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/EmailSignups/{formId}/signup</span>
+<span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/EmailSignups</span>
 <span style="color:#dcdcaa;">Body</span>: {
+    <span style="color:#ce9178;">"fromId"</span>: <span style="color:#ce9178;">"1"</span>
     <span style="color:#ce9178;">"email"</span>: <span style="color:#ce9178;">"user@example.com"</span>
 }
     </pre>
@@ -252,10 +253,29 @@
             console.error('Error during signup:', error);
             messageDiv.style.display = 'block';
             messageDiv.className = 'message error';
-            if (error.response && error.response.data && error.response.data.message) {
-                messageDiv.textContent = 'Error: ' + error.response.data.message;
+            
+            if (error.response) {
+                switch (error.response.status) {
+                    case 400: // Bad Request
+                        messageDiv.textContent = 'Invalid email address.';
+                        break;
+                    case 404: // Not Found
+                        messageDiv.textContent = 'Signup form not found.';
+                        break;
+                    case 409: // Conflict
+                        if (error.response.data.includes('Email address already signed up')) {
+                            messageDiv.textContent = 'Email address already signed up.';
+                        } else if (error.response.data.includes('Form is not active')) {
+                            messageDiv.textContent = 'Signup form is not active.';
+                        } else {
+                            messageDiv.textContent = 'A conflict occurred. Please try again.';
+                        }
+                        break;
+                    default:
+                        messageDiv.textContent = 'An unexpected error occurred. Please try again.';
+                }
             } else {
-                messageDiv.textContent = 'An unexpected error occurred. Please try again.';
+                messageDiv.textContent = 'Network error. Please check your internet connection and try again.';
             }
         }
     });
