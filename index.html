@@ -1,291 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta tags and fonts as before -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Collecto - Open-Source Email Collection API</title>
-    
-    <!-- Importing Fira Mono Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Importing Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Fira Mono', monospace;
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        a {
-            color: #e0e0e0;
-            text-decoration: none;
-            border-bottom: 1px dashed #e0e0e0;
-            transition: color 0.3s, border-bottom 0.3s;
-        }
-        a:hover {
-            color: red;
-            border-bottom: 1px solid red;
-        }
-        header {
-            text-align: center;
-            padding: 50px 20px;
-        }
-        header h1 {
-            font-size: 4em;
-            margin: 0;
-            font-weight: 700;
-            color: #f0f0f0;
-            letter-spacing: -2px;
-        }
-        header p {
-            font-size: 1.5em;
-            margin-top: 10px;
-            color: #bbb;
-        }
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin: 20px auto;
-            max-width: 800px;
-            text-align: center;
-        }
-        p strong {
-            font-weight: 700;
-            transition: color 0.5s;
-        }
-        p strong:hover {
-            color: red;
-        }
-        .form-container {
-            background-color: #2e2e2e;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            margin-top: 30px;
-        }
-        .form-container h2 {
-            margin-bottom: 20px;
-            color: #f0f0f0;
-            font-size: 2em;
-        }
-        input[type="email"], input[type="submit"] {
-            padding: 15px;
-            font-size: 1.2em;
-            width: 100%;
-            margin: 10px 0;
-            border-radius: 50px;
-            border: none;
-            font-family: 'Fira Mono', monospace;
-            outline: none;
-        }
-        input[type="email"] {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            border: 1px solid #555;
-        }
-        input[type="email"]:focus {
-            border-color: red;
-        }
-        input[type="submit"] {
-            background-color: red;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            border-radius: 50px;
-            border: none;
-        }
-        input[type="submit"]:hover {
-            background-color: #ff4d4d;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #e0e0e0;
-            text-align: center;
-            display: none;
-        }
-        .message.success {
-            color: #4caf50;
-        }
-        .message.error {
-            color: #f44336;
-        }
-        .code-section {
-            background-color: #2a2a2a;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 50px;
-            font-family: 'Fira Mono', monospace;
-            max-width: 800px;
-            width: 90%;
-            box-sizing: border-box;
-        }
-        .code-section h2 {
-            color: #f0f0f0;
-            margin-bottom: 20px;
-            font-size: 2em;
-            text-align: center;
-        }
-        .code-section p {
-            font-size: 1.2em;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .code-section pre {
-            overflow-x: auto;
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            color: #e0e0e0;
-            font-size: 1em;
-            line-height: 1.5;
-            border: 1px solid #555;
-        }
-        .code-section code {
-            color: #9cdcfe;
-        }
-        footer {
-            text-align: center;
-            font-size: 0.8em;
-            color: #777;
-            margin-top: 60px;
-            margin-bottom: 20px;
-        }
-        /* Media Queries */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-            .form-container {
-                padding: 20px;
-            }
-            .code-section {
-                padding: 20px;
-            }
-        }
-    </style>
 </head>
 <body>
+    <header class="container">
+        <h1>Collecto</h1>
+        <p>Open-Source, Self-Hosted Email Collection—yours to shape, secure, and scale.</p>
+    </header>
 
-<header>
-    <h1>Collecto</h1>
-    <p>Open-Source, Self-Hosted Email Collection API</p>
-</header>
+    <main>
+        <section class="container" style="animation-delay:0.2s;">
+            <p>
+                <strong>Collecto</strong> empowers you to capture and manage emails with full sovereignty.
+                It’s built for those who demand trust, transparency, and total ownership over their data.
+                No unwelcome surprises, no hidden fees—just a beautifully efficient, developer-friendly solution 
+                that ensures every email you collect is real, relevant, and ready for engagement.
+            </p>
+            
+            <div class="form-container">
+                <h2>We’re Building a Managed, Hosted Version—Be the First to Know</h2>
+                <p>
+                    Sign up now to join our early access list and stay informed as we launch a fully managed 
+                    version of Collecto. Enjoy zero maintenance, automatic updates, and our multi-layered spam defenses.
+                    From reCAPTCHA verification and email confirmations to excluding disposable email providers, 
+                    we keep your list clean so you can focus on what matters most.
+                </p>
+                <div class="form-wrapper">
+                    <form id="signup-form" action="https://your-collecto-instance.com/api/EmailSignups" method="POST">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <input type="submit" value="Notify Me">
+                    </form>
+                </div>
+                <div class="message" id="form-message"></div>
+            </div>
+        </section>
 
-<p>
-    <strong>Collecto</strong> is an <strong>open-source</strong>, self-hosted email collection solution built for developers who care about <strong>control</strong>, <strong>scalability</strong>, and <strong>security</strong>.
-    <br><br>
-    In a world where hosted services often put your data at risk, Collecto provides a solution that you <strong>own and manage</strong>.
-    <br><br>
-    Whether you're building a high-traffic product or a small project, Collecto is <strong>production-ready</strong> out of the box, capable of handling everything from basic email signup forms to complex data workflows. Built with the backend developer in mind, Collecto defends against <strong>spam</strong>, <strong>DDoS attacks</strong>, and gives you the <strong>flexibility</strong> to integrate email signup functionality into any part of your stack.
-</p>
+        <section class="container code-section" style="animation-delay:0.4s;">
+            <h2>Integrate in Seconds</h2>
+            <p>
+                With <strong>Collecto</strong>, adding powerful email collection to your stack is effortless. 
+                One endpoint, a simple JSON payload, and you’re ready to go. No complexity, no friction—just 
+                high-quality leads delivered securely.
+            </p>
+            <pre><code>POST /api/EmailSignups
+Content-Type: application/json
 
-<div class="form-container">
-    <h2>Stay Updated</h2>
-    <form id="signup-form" action="https://your-collecto-instance.com/api/EmailSignups" method="POST">
-        <input type="email" name="email" placeholder="Enter your email" required>
-        <input type="submit" value="Tell me more">
-    </form>
-    <div class="message" id="form-message"></div>
-</div>
+{
+  "FormId": "...",
+  "Email": "user@example.com"
+}</code></pre>
+        </section>
 
-<div class="code-section">
-    <h2>How it Works</h2>
-    <p>Creating a form and accepting signups is <strong>simple</strong> with Collecto.</p>
-    <pre>
-<span style="color:#569cd6;"># Create a signup form</span>
+        <!-- Features Section -->
+        <section class="features container" style="animation-delay:0.5s;">
+            <h2>Why Collecto?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Effortless Integration</h3>
+                    <p>Get up and running in minutes. Just a single endpoint and you’re collecting verified emails.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Complete Data Ownership</h3>
+                    <p>Host it yourself—control your data, your infrastructure, and your policies with no third-party lock-in.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Built on Trust</h3>
+                    <p>From reCAPTCHA to email confirmations, every subscriber is genuine and secured against spam.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Open-Source Freedom</h3>
+                    <p>Inspect, adapt, and contribute. With open-source at its core, Collecto puts you in the driver’s seat.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✉️</div>
+                    <h3>Customizable Templates</h3>
+                    <p>Create beautiful, branded emails to welcome new subscribers, ensuring a polished first impression.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🧩</div>
+                    <h3>API-First Architecture</h3>
+                    <p>Every action is accessible through our API. Easily integrate with your favorite tools and workflows.</p>
+                </div>
+            </div>
+        </section>
 
-<span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/SignupForms</span>
-<span style="color:#dcdcaa;">Body</span>: {
-    <span style="color:#ce9178;">"formName"</span>: <span style="color:#ce9178;">"Newsletter Signup"</span>
-}
+        <div class="link-buttons" style="animation-delay:0.6s;">
+            <a href="https://github.com/Eliran-Turgeman/Collecto" class="button">View on GitHub</a>
+            <a href="https://www.16elt.com/Collecto/" class="secondary-button">Read the Docs</a>
+        </div>
+    </main>
 
-<span style="color:#569cd6;"># Accept signups</span>
+    <footer>
+        <p>&copy; 2024 Collecto. Engineered for those who value control and quality.</p>
+        <p>Released under the <a href="https://github.com/Eliran-Turgeman/Collecto/blob/master/LICENSE">MIT License</a>.</p>
+    </footer>
 
-<span style="color:#569cd6;">POST</span> <span style="color:#b5cea8;">/api/EmailSignups</span>
-<span style="color:#dcdcaa;">Body</span>: {
-    <span style="color:#ce9178;">"formId"</span>: <span style="color:#ce9178;">"1"</span>,
-    <span style="color:#ce9178;">"email"</span>: <span style="color:#ce9178;">"user@example.com"</span>
-}
-    </pre>
-</div>
-
-<div style="text-align:center; margin-top: 50px;">
-    <a href="https://github.com/yourusername/collecto" class="button">View on GitHub</a>
-    <a href="https://yourwebsite.com/docs" class="button secondary-button">Read the Docs</a>
-</div>
-
-<footer>
-    <p>&copy; 2024 Collecto. Built for developers, by developers.</p>
-    <p>Released under the <a href="https://github.com/yourusername/collecto/blob/main/LICENSE">MIT License</a>.</p>
-</footer>
-
-<script>
-    document.getElementById('signup-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        const email = formData.get('email');
-        const formId = '7'; // Update with your actual form ID
-        const collectoDomain = 'https://3755-85-65-170-141.ngrok-free.app';
+    <script>
+        const form = document.getElementById('signup-form');
         const messageDiv = document.getElementById('form-message');
-        
-        try {
-            const response = await axios.post(`${collectoDomain}/api/EmailSignups`, {
-                formId,
-                email
-            });
-            
-            messageDiv.style.display = 'block';
-            messageDiv.className = 'message success';
-            messageDiv.textContent = 'Signup successful! Please check your email to confirm your subscription.';
-            this.reset();
-        } catch (error) {
-            console.error('Error during signup:', error);
-            messageDiv.style.display = 'block';
-            messageDiv.className = 'message error';
-            
-            if (error.response) {
-                switch (error.response.status) {
-                    case 400: // Bad Request
-                        messageDiv.textContent = 'Invalid email address.';
-                        break;
-                    case 404: // Not Found
-                        messageDiv.textContent = 'Signup form not found.';
-                        break;
-                    case 409: // Conflict
-                        if (error.response.data.includes('Email address already signed up')) {
-                            messageDiv.textContent = 'Email address already signed up.';
-                        } else if (error.response.data.includes('Form is not active')) {
-                            messageDiv.textContent = 'Signup form is not active.';
-                        } else {
-                            messageDiv.textContent = 'A conflict occurred. Please try again.';
-                        }
-                        break;
-                    default:
-                        messageDiv.textContent = 'An unexpected error occurred. Please try again.';
-                }
-            } else {
-                messageDiv.textContent = 'Network error. Please check your internet connection and try again.';
-            }
-        }
-    });
-</script>
 
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const email = formData.get('email');
+
+            axios.post(form.action, { email: email })
+                .then(res => {
+                    form.reset();
+                    messageDiv.style.color = '#FF3B30';
+                    messageDiv.textContent = 'Thanks for signing up! We’ll keep you posted on Collecto’s managed release.';
+                })
+                .catch(err => {
+                    messageDiv.style.color = 'red';
+                    messageDiv.textContent = 'Something went wrong. Please try again.';
+                });
+        });
+    </script>
 </body>
 </html>
