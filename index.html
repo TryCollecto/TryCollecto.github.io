@@ -113,7 +113,7 @@ Content-Type: application/json
             const formData = new FormData(form);
             const email = formData.get('email');
 
-            axios.post(form.action, { email: email })
+            axios.post(form.action, { email: email, formId: "96246F2E-E0EE-4B32-834E-476D1391EB7F" })
                 .then(res => {
                     form.reset();
                     messageDiv.style.color = '#FF3B30';
