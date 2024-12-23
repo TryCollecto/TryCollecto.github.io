@@ -107,6 +107,7 @@ Content-Type: application/json
     <script>
         const form = document.getElementById('signup-form');
         const messageDiv = document.getElementById('form-message');
+        messageDiv.textContent = ''; // clear up message from previous submission
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -121,7 +122,7 @@ Content-Type: application/json
                })
                 .then(res => {
                     form.reset();
-                    messageDiv.style.color = '#FF3B30';
+                    messageDiv.style.color = 'green';
                     messageDiv.textContent = 'Thanks for signing up! We’ll keep you posted on Collecto’s managed release.';
                 })
                 .catch(err => {
