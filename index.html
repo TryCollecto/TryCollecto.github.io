@@ -107,6 +107,10 @@ Content-Type: application/json
     <script>
         const form = document.getElementById('signup-form');
         const messageDiv = document.getElementById('form-message');
+        const submitButton = form.querySelector('input[type="submit"]');
+
+        submitButton.disabled = true;
+        submitButton.classList.add('loading');
         messageDiv.textContent = ''; // clear up message from previous submission
 
         form.addEventListener('submit', function(e) {
@@ -124,10 +128,14 @@ Content-Type: application/json
                     form.reset();
                     messageDiv.style.color = 'green';
                     messageDiv.textContent = 'Thanks for signing up! We’ll keep you posted on Collecto’s managed release.';
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('loading');
                 })
                 .catch(err => {
                     messageDiv.style.color = 'red';
                     messageDiv.textContent = 'Something went wrong. Please try again.';
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('loading');
                 });
         });
     </script>
